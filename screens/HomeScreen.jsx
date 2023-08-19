@@ -10,8 +10,7 @@ import {
 } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
+import { Ionicons, Feather } from "@expo/vector-icons";
 import DatePicker from "react-native-date-ranges";
 import Header from "../components/Header";
 import {
@@ -37,7 +36,7 @@ const HomeScreen = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      headerTitle: "DreamBooking.com",
+      headerTitle: "Dream-Booker",
       headerTitleAlign: "center",
       headerTitleStyle: {
         color: "white",
@@ -78,7 +77,7 @@ const HomeScreen = () => {
     if (!route.params || !selectedDates) {
       Alert.alert(
         "Invalid Details",
-        "Please enter all the details to continue", 
+        "Please enter all the details to continue",
         [
           {
             text: "Cancel",
@@ -98,9 +97,9 @@ const HomeScreen = () => {
         children: children,
         selectedDates: selectedDates,
         place: place,
-      })
-    };
-  }
+      });
+    }
+  };
 
   return (
     <>

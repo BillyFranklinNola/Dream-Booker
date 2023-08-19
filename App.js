@@ -1,13 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import StackNavigator from './StackNavigator';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import StackNavigator from "./StackNavigator";
 import { ModalPortal } from "react-native-modals";
+import { Provider } from "react-redux";
+import store from "./store";
 
 export default function App() {
   return (
     <>
-      <StackNavigator/>
-      <ModalPortal/>
+      <Provider store={store}>
+        <StackNavigator />
+        <ModalPortal />
+      </Provider>
     </>
   );
 }
@@ -15,6 +19,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
 });

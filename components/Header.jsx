@@ -25,7 +25,7 @@ const Header = () => {
           padding: 6,
         }}
       >
-        <Ionicons name="bed-outline" size={20} color="white"/>
+        <Ionicons name="bed-outline" size={20} color="white" />
         <Text
           style={{
             marginLeft: 8,
@@ -44,7 +44,7 @@ const Header = () => {
           borderColor: "white",
         }}
       >
-        <Ionicons name="airplane-outline" size={20} color="white"/>
+        <Ionicons name="airplane-outline" size={20} color="white" />
         <Text
           style={{
             marginLeft: 8,
@@ -63,7 +63,7 @@ const Header = () => {
           borderColor: "white",
         }}
       >
-        <AntDesign name="car" size={20} color="white"/>
+        <AntDesign name="car" size={20} color="white" />
         <Text
           style={{
             marginLeft: 8,
@@ -82,7 +82,7 @@ const Header = () => {
           borderColor: "white",
         }}
       >
-        <FontAwesome5 name="uber" size={20} color="white"/>
+        <FontAwesome5 name="uber" size={20} color="white" />
         <Text
           style={{
             marginLeft: 8,
