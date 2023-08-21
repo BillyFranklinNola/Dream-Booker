@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View, ScrollView } from "react-native";
+import { Pressable, StyleSheet, Text, View, ScrollView, ActivityIndicator } from "react-native";
 import React, { useLayoutEffect, useState, useEffect } from "react";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { Octicons, Ionicons, FontAwesome, Entypo } from "@expo/vector-icons";
@@ -10,6 +10,9 @@ import {
   ModalTitle,
   ModalContent,
 } from "react-native-modals";
+import { db } from "../Firebase";
+import { collection, getDocs } from "firebase/firestore";
+
 
 const PlacesScreen = () => {
   const route = useRoute();
@@ -492,7 +495,7 @@ const PlacesScreen = () => {
     },
   ];
   const [loading, setLoading] = useState(false);
-  const [items, setItems] = useState([]);
+  // const [items, setItems] = useState([]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -547,6 +550,22 @@ const PlacesScreen = () => {
     }
   };
 
+  // useEffect(() => {
+  //   if (items > 0) return;
+  //   setLoading(true);
+
+  //   const getPlaces = async () => {
+  //     const colRef = collection(db, "places");
+  //     const docsSnap = await getDocs(colRef);
+  //     docsSnap.forEach((doc) => {
+  //       items.push(doc.data());
+  //     });
+  //     setLoading(false);
+  //   }
+  //   getPlaces();
+  // }, [items]);
+  // console.log(items);
+
   return (
     <View>
       <Pressable
@@ -586,7 +605,12 @@ const PlacesScreen = () => {
           </Text>
         </Pressable>
       </Pressable>
-      <ScrollView style={{ backgroundColor: "#F5F5F5" }}>
+      {loading ? (
+        <Text>
+          <ActivityIndicator size="large" color="blue" />
+        </Text>
+      ) : (
+        <ScrollView style={{ backgroundColor: "#F5F5F5" }}>
         {sortedData
           ?.filter((item) => item.place === route.params.place)
           .map((item) =>
@@ -603,6 +627,8 @@ const PlacesScreen = () => {
             ))
           )}
       </ScrollView>
+      ) }
+      
       <BottomModal
         onBackdropPress={() => setModalVisible(!modalVisible)}
         swipeDirection={["up", "down"]}

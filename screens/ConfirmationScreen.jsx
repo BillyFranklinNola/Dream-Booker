@@ -2,15 +2,20 @@ import { StyleSheet, Text, View, Pressable } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
+import { savedPlaces } from "../SavedReducer";
+import { auth } from "../Firebase";
 
 const ConfirmationScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
+  const dispatch = useDispatch();
+  const uid = auth.currentUser.uid;
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      title: "Confirmation",
+      title: "Confirmed Stays",
       headerTitleStyle: {
         fontSize: 20,
         fontWeight: "bold",
@@ -24,6 +29,20 @@ const ConfirmationScreen = () => {
       },
     });
   }, []);
+
+  const confirmBooking = async() => {
+    dispatch(savedPlaces(route.params));
+
+    await setDoc(
+      doc(db, "users", `${uid}`),
+      {
+        bookingDetails: { ...route.params },
+      },
+      { merge: true }
+    )
+    navigation.navigate("Main")
+  }
+
   return (
     <View>
       <Pressable style={{ backgroundColor: "white", margin: 10 }}>
@@ -101,25 +120,17 @@ const ConfirmationScreen = () => {
           </Text>
         </View>
         <Pressable
+        onPress={confirmBooking}
           style={{
             backgroundColor: "#003580",
             width: 120,
             padding: 5,
             marginHorizontal: 12,
             marginBottom: 20,
-            borderRadius: 4,
+            borderRadius:4
           }}
         >
-          <Text
-            style={{
-              textAlign: "center",
-              color: "white",
-              fontSize: 15,
-              fontWeight: "bold",
-            }}
-          >
-            Book Now
-          </Text>
+          <Text style={{textAlign:"center",color:"white",fontSize:15,fontWeight:"bold"}}>Book Now</Text>
         </Pressable>
       </Pressable>
     </View>

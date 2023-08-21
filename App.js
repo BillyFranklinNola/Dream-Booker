@@ -1,8 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import StackNavigator from "./StackNavigator";
 import { ModalPortal } from "react-native-modals";
 import { Provider } from "react-redux";
+import { registerRootComponent } from 'expo';
+import StackNavigator from "./StackNavigator";
 import store from "./store";
 
 export default function App() {
@@ -15,6 +16,8 @@ export default function App() {
     </>
   );
 }
+
+registerRootComponent(App);
 
 const styles = StyleSheet.create({
   container: {

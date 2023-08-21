@@ -1,8 +1,10 @@
 import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextInput } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import SearchResults from "../components/SearchResults";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../Firebase";
 
 const SearchScreen = () => {
   const [input, setInput] = useState("");
@@ -467,6 +469,20 @@ const SearchScreen = () => {
       ],
     },
   ];
+  // const [items, setItems] = useState([]);
+
+  // useEffect(() => {
+  //   if (items > 0) return;
+  //   const getPlaces = async () => {
+  //     const colRef = collection(db, "places");
+  //     const docsSnap = await getDocs(colRef);
+  //     docsSnap.forEach((doc) => {
+  //       items.push(doc.data());
+  //     });
+  //   }
+  //   getPlaces();
+  // }, [items]);
+  // console.log(items);
 
   return (
     <SafeAreaView>
@@ -486,7 +502,7 @@ const SearchScreen = () => {
         <TextInput
           value={input}
           onChangeText={(text) => setInput(text)}
-          placeholder="Enter your destinationr"
+          placeholder="Enter your destination"
         />
         <Feather name="search" size={22} color="black" />
       </View>
