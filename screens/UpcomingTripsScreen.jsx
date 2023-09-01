@@ -1,12 +1,14 @@
 import { StyleSheet, Text, View ,SafeAreaView,Pressable} from 'react-native'
-import React ,{useLayoutEffect} from 'react'
+import React ,{useLayoutEffect, useEffect, useState} from 'react'
 import { MaterialIcons } from "@expo/vector-icons";
-import { useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native';
+import {collection, query, where, getDocs} from 'firebase/firestore';
+import { db } from '../Firebase';
 
-const BookingScreen = () => {
-  const bookings = useSelector((state) => state.booking.booking);
+const UpcomingTripsScreen = () => {
+  const [bookings, setBookings] = useState([]);
   const navigation = useNavigation();
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
@@ -25,6 +27,21 @@ const BookingScreen = () => {
       },
     });
   }, []);
+
+  useEffect(() => {
+    const getBookings = async () => {
+      try {
+        const q = query(collection(db, "users"), where("bookings", "!=", []));
+        const data = await getDocs(q);
+        const userData = data.docs[0].data();
+        setBookings(userData.bookings);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getBookings();
+  }, []);
+
   return (
     <SafeAreaView>
           {bookings.length > 0 && bookings.map((item, index) => (
@@ -86,6 +103,6 @@ const BookingScreen = () => {
   )
 }
 
-export default BookingScreen
+export default UpcomingTripsScreen
 
 const styles = StyleSheet.create({})

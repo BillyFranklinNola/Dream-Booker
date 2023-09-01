@@ -73,33 +73,48 @@ const HomeScreen = () => {
     );
   };
 
-  const searchPlaces = (place) => {
-    if (!route.params || !selectedDates) {
-      Alert.alert(
-        "Invalid Details",
-        "Please enter all the details to continue",
-        [
-          {
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel",
-          },
-          { text: "OK", onPress: () => console.log("OK Pressed") },
-        ],
-        { cancelable: false }
-      );
-    }
+// Reusable function for displaying alerts
+const showError = (title, message) => {
+  Alert.alert(
+    title,
+    message,
+    [
+      {
+        text: "OK",
+        onPress: () => console.log("OK Pressed"),
+      },
+    ],
+    { cancelable: false }
+  );
+};
 
-    if (route.params && selectedDates) {
-      navigation.navigate("Places", {
-        routes: rooms,
-        adults: adults,
-        children: children,
-        selectedDates: selectedDates,
-        place: place,
-      });
-    }
-  };
+// ...
+
+const searchPlaces = (place) => {
+  const errorMessages = [];
+
+  if (!selectedDates) {
+    errorMessages.push("Please select your dates to continue.");
+  }
+
+  if (!route.params || !route.params.input) {
+    errorMessages.push("Please enter a destination to continue.");
+  }
+
+  if (errorMessages.length > 0) {
+    const errorMessage = errorMessages.join('\n');
+    showError("Invalid Details", errorMessage);
+    return;
+  }
+
+  navigation.navigate("Places", {
+    routes: rooms,
+    adults: adults,
+    children: children,
+    selectedDates: selectedDates,
+    place: place,
+  });
+}
 
   return (
     <>
@@ -129,12 +144,7 @@ const HomeScreen = () => {
               }}
             >
               <Feather name="search" size={24} color="black" />
-              <TextInput
-                placeholderTextColor="black"
-                placeholder={
-                  route?.params ? route.params.input : "Enter your destination"
-                }
-              />
+              <Text>Enter your destination</Text>
             </Pressable>
             <Pressable
               style={{
@@ -198,13 +208,12 @@ const HomeScreen = () => {
               }}
             >
               <Ionicons name="person-outline" size={24} color="#003580" />
-              <TextInput
-                placeholderTextColor="red"
-                placeholder={`${rooms} room(s) • ${adults} adult(s) • ${children} children`}
-              />
+              <Text style={{color: "red"}}>
+                {`${rooms} room(s) • ${adults} adult(s) • ${children} children`}
+              </Text>
             </Pressable>
             <Pressable
-              onPress={() => searchPlaces(route?.params.input)}
+              onPress={() => route?.params?.input && searchPlaces(route.params.input)}
               style={{
                 paddingHorizontal: 10,
                 borderColor: "#FFC72C",
@@ -335,7 +344,7 @@ const HomeScreen = () => {
         }
         onHardwareBackPress={() => setModalVisible(!modalVisible)}
         visible={modalVisible}
-        onTouchOutside={() => modalVisible(!modalVisible)}
+        onTouchOutside={() => setModalVisible(!modalVisible)}
       >
         <ModalContent style={{ width: "100%", height: 310 }}>
           <View

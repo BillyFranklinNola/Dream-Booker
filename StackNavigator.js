@@ -7,7 +7,6 @@ import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from '@expo/vector-icons';
 // import SavedScreen from "./screens/SavedScreen";
-import BookingScreen from "./screens/BookingScreen";
 // import ProfileScreen from "./screens/ProfileScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import SearchScreen from "./screens/SearchScreen";
@@ -19,6 +18,8 @@ import UserScreen from "./screens/UserScreen";
 import ConfirmationScreen from "./screens/ConfirmationScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
+import UpcomingTripsScreen from "./screens/UpcomingTripsScreen";
+
 const StackNavigator = () => {
   const Tab = createBottomTabNavigator();
   const Stack = createNativeStackNavigator();
@@ -57,10 +58,10 @@ const StackNavigator = () => {
         /> */}
 
         <Tab.Screen
-          name="Bookings"
-          component={BookingScreen}
+          name="Trips"
+          component={UpcomingTripsScreen}
           options={{
-            tabBarLabel: "Bookings",
+            tabBarLabel: "Trips",
             headerShown: false,
             tabBarIcon: ({ focused }) =>
               focused ? (
