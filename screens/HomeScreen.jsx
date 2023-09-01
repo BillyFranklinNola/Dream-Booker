@@ -12,7 +12,7 @@ import React, { useLayoutEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Ionicons, Feather } from "@expo/vector-icons";
 import DatePicker from "react-native-date-ranges";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 import {
   ModalContent,
   ModalFooter,
@@ -40,7 +40,7 @@ const HomeScreen = () => {
       headerTitleAlign: "center",
       headerTitleStyle: {
         color: "white",
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: "bold",
       },
       headerStyle: {
@@ -48,14 +48,14 @@ const HomeScreen = () => {
         height: 110,
         shadowColor: "transparent",
       },
-      headerRight: () => (
-        <Ionicons
-          name="notifications-outline"
-          size={24}
-          color="white"
-          style={{ marginRight: 12 }}
-        />
-      ),
+      // headerRight: () => (
+      //   <Ionicons
+      //     name="notifications-outline"
+      //     size={24}
+      //     color="white"
+      //     style={{ marginRight: 12 }}
+      //   />
+      // ),
     });
   }, []);
 
@@ -104,7 +104,7 @@ const HomeScreen = () => {
   return (
     <>
       <View>
-        <Header />
+        {/* <Header /> */}
         <ScrollView>
           <View
             style={{
@@ -112,6 +112,7 @@ const HomeScreen = () => {
               borderColor: "#FFC72C",
               borderWidth: 3,
               borderRadius: 6,
+              marginTop: 40,
             }}
           >
             <Pressable
@@ -225,7 +226,7 @@ const HomeScreen = () => {
             </Pressable>
           </View>
           <Text
-            style={{ marginHorizontal: 25, fontSize: 17, fontWeight: "500" }}
+            style={{ marginHorizontal: 25, fontSize: 17, fontWeight: "500", marginTop: 20 }}
           >
             Travel more, spend less
           </Text>
@@ -234,7 +235,7 @@ const HomeScreen = () => {
               style={{
                 width: 200,
                 height: 150,
-                marginTop: 10,
+                marginTop: 20,
                 backgroundColor: "#003580",
                 borderRadius: 10,
                 padding: 20,

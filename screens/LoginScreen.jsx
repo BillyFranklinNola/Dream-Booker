@@ -81,11 +81,11 @@ const LoginScreen = () => {
             marginTop: 100,
           }}
         >
-          <Text style={{ color: "#003580", fontSize: 17, fontWeight: "700" }}>
+          <Text style={{ color: "#003580", fontSize: 30, fontWeight: "700" }}>
             Sign In
           </Text>
           <Text style={{ marginTop: 15, fontSize: 18, fontWeight: "800" }}>
-            Sign In to Your Account
+            Login to Your Account
           </Text>
         </View>
         <View style={{ marginTop: 50 }}>

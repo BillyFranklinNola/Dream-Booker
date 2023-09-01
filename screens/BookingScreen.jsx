@@ -10,15 +10,16 @@ const BookingScreen = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      title: "Bookings",
+      title: "Upcoming Trips",
+      headerTitleAlign: "center",
       headerTitleStyle: {
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: "bold",
         color: "white",
       },
       headerStyle: {
         backgroundColor: "#003580",
-        height: 110,
+        height: 120,
         borderBottomColor: "transparent",
         shadowColor: "transparent",
       },

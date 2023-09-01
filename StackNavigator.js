@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet} from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -6,9 +6,9 @@ import HomeScreen from "./screens/HomeScreen";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from '@expo/vector-icons';
-import SavedScreen from "./screens/SavedScreen";
+// import SavedScreen from "./screens/SavedScreen";
 import BookingScreen from "./screens/BookingScreen";
-import ProfileScreen from "./screens/ProfileScreen";
+// import ProfileScreen from "./screens/ProfileScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import SearchScreen from "./screens/SearchScreen";
 import PlacesScreen from "./screens/PlacesScreen";
@@ -41,7 +41,7 @@ const StackNavigator = () => {
           }}
         />
 
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Saved"
           component={SavedScreen}
           options={{
@@ -54,7 +54,7 @@ const StackNavigator = () => {
                 <AntDesign name="hearto" size={24} color="black" />
               ),
           }}
-        />
+        /> */}
 
         <Tab.Screen
           name="Bookings"
@@ -71,7 +71,7 @@ const StackNavigator = () => {
           }}
         />
 
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Profile"
           component={ProfileScreen}
           options={{
@@ -84,7 +84,7 @@ const StackNavigator = () => {
                 <Ionicons name="person-outline" size={24} color="black" />
               ),
           }}
-        />
+        /> */}
       </Tab.Navigator>
     );
   }

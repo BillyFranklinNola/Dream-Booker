@@ -5,6 +5,8 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { savedPlaces } from "../SavedReducer";
 import { auth } from "../Firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../Firebase";
 
 const ConfirmationScreen = () => {
   const navigation = useNavigation();
@@ -15,7 +17,8 @@ const ConfirmationScreen = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      title: "Confirmed Stays",
+      title: "Final Details",
+      headerTitleAlign: "center",
       headerTitleStyle: {
         fontSize: 20,
         fontWeight: "bold",
@@ -23,7 +26,7 @@ const ConfirmationScreen = () => {
       },
       headerStyle: {
         backgroundColor: "#003580",
-        height: 110,
+        height: 140,
         borderBottomColor: "transparent",
         shadowColor: "transparent",
       },
