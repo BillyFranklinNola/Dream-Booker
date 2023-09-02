@@ -4,7 +4,6 @@ import {
   View,
   ScrollView,
   Pressable,
-  TextInput,
   Button,
   Alert,
 } from "react-native";
@@ -73,48 +72,49 @@ const HomeScreen = () => {
     );
   };
 
-// Reusable function for displaying alerts
-const showError = (title, message) => {
-  Alert.alert(
-    title,
-    message,
-    [
-      {
-        text: "OK",
-        onPress: () => console.log("OK Pressed"),
-      },
-    ],
-    { cancelable: false }
-  );
-};
+  // Reusable function for displaying alerts
+  const showError = (title, message) => {
+    Alert.alert(
+      title,
+      message,
+      [
+        {
+          text: "OK",
+          onPress: () => console.log("OK Pressed"),
+        },
+      ],
+      { cancelable: false }
+    );
+  };
 
-// ...
+  // ...
 
-const searchPlaces = (place) => {
-  const errorMessages = [];
+  const searchPlaces = (place) => {
+    const errorMessages = [];
 
-  if (!selectedDates) {
-    errorMessages.push("Please select your dates to continue.");
-  }
+    if (!selectedDates) {
+      errorMessages.push("Please select your dates to continue.");
+    }
 
-  if (!route.params || !route.params.input) {
-    errorMessages.push("Please enter a destination to continue.");
-  }
+    if (!route.params || !route.params.input) {
+      errorMessages.push("Please enter a destination to continue.");
+    }
 
-  if (errorMessages.length > 0) {
-    const errorMessage = errorMessages.join('\n');
-    showError("Invalid Details", errorMessage);
-    return;
-  }
+    if (errorMessages.length > 0) {
+      const errorMessage = errorMessages.join("\n");
+      showError("Invalid Details", errorMessage);
+      return;
+    }
 
-  navigation.navigate("Places", {
-    routes: rooms,
-    adults: adults,
-    children: children,
-    selectedDates: selectedDates,
-    place: place,
-  });
-}
+    navigation.navigate("Places", {
+      routes: rooms,
+      adults: adults,
+      children: children,
+      selectedDates: selectedDates,
+      place: place,
+    });
+    console.log(route.params.input)
+  };
 
   return (
     <>
@@ -144,7 +144,13 @@ const searchPlaces = (place) => {
               }}
             >
               <Feather name="search" size={24} color="black" />
-              <Text>Enter your destination</Text>
+              <Text>
+                {route?.params ? (
+                route.params.input
+              ) : (
+                "Enter a destination"
+              )}
+              </Text>
             </Pressable>
             <Pressable
               style={{
@@ -166,6 +172,7 @@ const searchPlaces = (place) => {
                   borderRadius: 0,
                   borderWidth: 0,
                   borderColor: "transparent",
+                  maxWidth: 250,
                 }}
                 customStyles={{
                   placeholderText: {
@@ -208,12 +215,14 @@ const searchPlaces = (place) => {
               }}
             >
               <Ionicons name="person-outline" size={24} color="#003580" />
-              <Text style={{color: "red"}}>
+              <Text style={{ color: "red" }}>
                 {`${rooms} room(s) • ${adults} adult(s) • ${children} children`}
               </Text>
             </Pressable>
             <Pressable
-              onPress={() => route?.params?.input && searchPlaces(route.params.input)}
+              onPress={() =>
+                route?.params?.input && searchPlaces(route.params.input)
+              }
               style={{
                 paddingHorizontal: 10,
                 borderColor: "#FFC72C",
@@ -235,7 +244,12 @@ const searchPlaces = (place) => {
             </Pressable>
           </View>
           <Text
-            style={{ marginHorizontal: 25, fontSize: 17, fontWeight: "500", marginTop: 20 }}
+            style={{
+              marginHorizontal: 25,
+              fontSize: 17,
+              fontWeight: "500",
+              marginTop: 20,
+            }}
           >
             Travel more, spend less
           </Text>

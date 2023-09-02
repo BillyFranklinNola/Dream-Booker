@@ -118,7 +118,7 @@ const PropertyCard = ({
               {property.oldPrice * adults}
             </Text>
             <Text style={{ fontSize: 18 }}>
-              Rs {property.newPrice * adults}
+              ${property.newPrice * adults}
             </Text>
           </View>
 

@@ -18,6 +18,7 @@ const UpcomingTripsScreen = () => {
         fontSize: 25,
         fontWeight: "bold",
         color: "white",
+        textAlign: "center",
       },
       headerStyle: {
         backgroundColor: "#003580",

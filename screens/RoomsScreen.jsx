@@ -11,10 +11,12 @@ const RoomsScreen = () => {
     navigation.setOptions({
       headerShown: true,
       title: "Available Rooms",
+      headerTitleAlign: "center",
       headerTitleStyle: {
         fontSize: 20,
         fontWeight: "bold",
         color: "white",
+        textAlign: "center",
       },
       headerStyle: {
         backgroundColor: "#003580",
@@ -70,7 +72,7 @@ const RoomsScreen = () => {
               >
                 {route.params.oldPrice}
               </Text>
-              <Text style={{ fontSize: 18 }}>Rs{route.params.newPrice}</Text>
+              <Text style={{ fontSize: 18 }}>${route.params.newPrice}</Text>
             </View>
             <Amenities />
 

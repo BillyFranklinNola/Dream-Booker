@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { auth } from "../Firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../Firebase";
-import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
 
 const ConfirmationScreen = () => {
@@ -19,7 +18,7 @@ const ConfirmationScreen = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      title: "Final Details",
+      title: "Confirm Details",
       headerTitleAlign: "center",
       headerTitleStyle: {
         fontSize: 20,
@@ -132,15 +131,17 @@ const ConfirmationScreen = () => {
             {route.params.children} children
           </Text>
         </View>
-        <Pressable
+      </Pressable>
+      <Pressable
           onPress={confirmBooking}
           style={{
             backgroundColor: "#003580",
-            width: 120,
+            width: 160,
             padding: 5,
             marginHorizontal: 12,
             marginBottom: 20,
             borderRadius: 4,
+            alignSelf: "center",
           }}
         >
           <Text
@@ -154,7 +155,6 @@ const ConfirmationScreen = () => {
             Book Now
           </Text>
         </Pressable>
-      </Pressable>
     </View>
   );
 };

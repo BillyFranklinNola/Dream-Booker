@@ -14,26 +14,26 @@ import { db } from "../Firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 
-const PlacesScreen = () => {
+const HotelsScreen = () => {
   const route = useRoute();
   const data = [
     {
       id: "0",
-      place: "Bangalore",
+      place: "Los Angeles",
       placeImage:
         "https://images.pexels.com/photos/7630190/pexels-photo-7630190.jpeg?auto=compress&cs=tinysrgb&w=800",
-      shortDescription: "City in Karnataka, India",
+      shortDescription: "City in California, United States of America",
       properties: [
         {
           id: "10",
-          name: "FabHotel Zeke",
+          name: "Hyatt Airport",
           image:
             "https://cf.bstatic.com/xdata/images/hotel/max1280x900/433845616.jpg?k=87bc315f35830189d9a1c935c3e167e648543c27f39ee4cafc5cf73ee24393b9&o=&hp=1",
           rating: 3.6,
           address:
-            "346, Hennur Main Road, Post, Kalyan Nagar, 560043 Bangalore, India ",
-          oldPrice: 4600,
-          newPrice: 3312,
+            "6225 W Century Blvd, Los Angeles, CA 90045, United States of America",
+          oldPrice: 234,
+          newPrice: 178,
           latitude: "13.0359",
           longitude: "77.6431",
           photos: [
@@ -118,12 +118,12 @@ const PlacesScreen = () => {
           id: "11",
           image:
             "https://cf.bstatic.com/xdata/images/hotel/max1280x900/223496641.jpg?k=070266558a879c2926e5511569c4828a007a3e1057b63ccfa30120c859341d1d&o=&hp=1",
-          name: "Regenta Inn Indiranagar Bangalore",
+          name: "Holiday Inn Downtown",
           rating: 4,
           address:
-            " 648/B, Regenta Inn Indiranagar, Binnamangala 1st stage Indiranagar, 560038 Bangalore, India",
-          oldPrice: 4201,
-          newPrice: 3327,
+            "611 S Westlake Ave, Los Angeles, CA 90057, United States of America",
+          oldPrice: 190,
+          newPrice: 160,
           latitude: "12.9784",
           longitude: "77.6408",
           photos: [
@@ -207,12 +207,12 @@ const PlacesScreen = () => {
         },
         {
           id: "12",
-          name: "Bloom Hotel - Bengaluru Airport",
+          name: "Ritz-Carlton",
           rating: 4.2,
           address:
-            "Down Town Park, Sadahalli Gate, Kempegowda Int'l Airport Rd, 562157 Bangalore, India",
-          oldPrice: 3800,
-          newPrice: 3078,
+            "900 W Olympic Blvd, Los Angeles, CA 90015, United States of America",
+          oldPrice: 245,
+          newPrice: 215,
           latitude: "13.1989",
           longitude: "77.7068",
           image:
@@ -295,19 +295,19 @@ const PlacesScreen = () => {
     },
     {
       id: "2",
-      place: "Hyderabad",
+      place: "New York, NY",
       placeImage:
         "https://images.pexels.com/photos/9373357/pexels-photo-9373357.jpeg?auto=compress&cs=tinysrgb&w=800",
-      shortDescription: "City in Telangana, India",
+      shortDescription: "City in New York, United States of America",
       properties: [
         {
           id: "20",
           name: "FabExpress Airport Stay Inn",
           rating: 3.5,
           address:
-            "CFC-4/C, Road No-2 Hardware Park, Beside TCS, Tukkuguda, 501351 Hyderabad, India",
-          oldPrice: 4332,
-          newPrice: 3200,
+            "200 4th St New York, NY 10003, United States of America",
+          oldPrice: 217,
+          newPrice: 180,
           photos: [
             {
               id: "140",
@@ -389,12 +389,12 @@ const PlacesScreen = () => {
         },
         {
           id: "22",
-          name: "Olive Service Apartments",
+          name: "The Met Apartments",
           rating: 4.5,
           address:
-            "Plot 73, Shilpi Valley, Gafoor Nagar, Madhapur, Opp Hitech City Mindspace, Hyderabad",
-          oldPrice: 5200,
-          newPrice: 4100,
+            "1000 5th Ave, New York, NY 10028, United States of America",
+          oldPrice: 329,
+          newPrice: 234,
           photos: [
             {
               id: "160",
@@ -500,7 +500,8 @@ const PlacesScreen = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      headerTitle: "Popular Places",
+      headerTitle: "Available Hotels",
+      headerTitleAlign: "center",
       headerTitleStyle: {
         color: "white",
         fontSize: 20,
@@ -580,24 +581,24 @@ const PlacesScreen = () => {
       >
         <Pressable
           onPress={() => setModalVisible(!modalVisible)}
-          style={{ flexDirection: "row", alignItems: "center" }}
+          style={{ flexDirection: "row", alignItems: "center", marginLeft: 10 }}
         >
           <Octicons name="arrow-switch" size={22} color="gray" />
           <Text style={{ fontSize: 15, fontWeight: "500", marginLeft: 8 }}>
             sort
           </Text>
         </Pressable>
-        <Pressable style={{ flexDirection: "row", alignItems: "center" }}>
+        {/* <Pressable style={{ flexDirection: "row", alignItems: "center" }}>
           <Ionicons name="filter" size={22} color="gray" />
           <Text style={{ fontSize: 15, fontWeight: "500", marginLeft: 8 }}>
             filter
           </Text>
-        </Pressable>
+        </Pressable> */}
         <Pressable
           onPress={() =>
             navigation.navigate("Map", { searchResults: searchPlaces })
           }
-          style={{ flexDirection: "row", alignItems: "center" }}
+          style={{ flexDirection: "row", alignItems: "center", marginRight: 10 }}
         >
           <FontAwesome name="map-marker" size={22} color="gray" />
           <Text style={{ fontSize: 15, fontWeight: "500", marginLeft: 8 }}>
@@ -702,6 +703,6 @@ const PlacesScreen = () => {
   );
 };
 
-export default PlacesScreen;
+export default HotelsScreen;
 
 const styles = StyleSheet.create({});

@@ -5,21 +5,24 @@ import {
   TextInput,
   View,
   Alert,
+  ScrollView,
 } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
-const UserScreen = () => {
+const ReservationDetailsScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      title: "User Details",
+      title: "Reservation Details",
+      headerTitlePosition: "center",
       headerTitleStyle: {
         fontSize: 20,
         fontWeight: "bold",
         color: "white",
+        textAlign: "center",
       },
       headerStyle: {
         backgroundColor: "#003580",
@@ -63,8 +66,11 @@ const UserScreen = () => {
     }
   };
   return (
-    <>
-      <View style={{ padding: 20 }}>
+    <ScrollView contentContainerStyle={{
+      flexGrow: 1,
+      keyboardShouldPersistTaps: 'handled',
+    }}>
+      <View style={{ flex: 1, padding: 20 }}>
         <View style={{ flexDirection: "column", gap: 10 }}>
           <Text>First Name</Text>
           <TextInput
@@ -109,7 +115,6 @@ const UserScreen = () => {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
-          marginBottom: 40,
           padding: 10,
         }}
       >
@@ -118,7 +123,6 @@ const UserScreen = () => {
             style={{
               flexDirection: "row",
               alignItems: "center",
-
               marginTop: 4,
               gap: 8,
             }}
@@ -145,14 +149,14 @@ const UserScreen = () => {
           style={{ backgroundColor: "#007FFF", padding: 10, borderRadius: 5 }}
         >
           <Text style={{ textAlign: "center", color: "white", fontSize: 15 }}>
-            Final Step
+            Submit
           </Text>
         </Pressable>
       </Pressable>
-    </>
+    </ScrollView>
   );
 };
 
-export default UserScreen;
+export default ReservationDetailsScreen;
 
 const styles = StyleSheet.create({});
