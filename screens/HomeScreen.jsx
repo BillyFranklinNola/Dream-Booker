@@ -72,7 +72,6 @@ const HomeScreen = () => {
     );
   };
 
-  // Reusable function for displaying alerts
   const showError = (title, message) => {
     Alert.alert(
       title,
@@ -86,8 +85,6 @@ const HomeScreen = () => {
       { cancelable: false }
     );
   };
-
-  // ...
 
   const searchPlaces = (place) => {
     const errorMessages = [];

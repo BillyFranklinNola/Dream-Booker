@@ -10,7 +10,6 @@ import { Ionicons } from '@expo/vector-icons';
 // import ProfileScreen from "./screens/ProfileScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import SearchScreen from "./screens/SearchScreen";
-import PlacesScreen from "./screens/HotelsScreen";
 import MapScreen from "./screens/MapScreen";
 import PropertyInfoScreen from "./screens/PropertyInfoScreen";
 import RoomsScreen from "./screens/RoomsScreen";

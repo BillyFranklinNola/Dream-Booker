@@ -295,7 +295,7 @@ const PropertyInfoScreen = () => {
             fontSize: 17,
           }}
         >
-          Select Availabilty
+          See Availabilty
         </Text>
       </Pressable>
     </>
