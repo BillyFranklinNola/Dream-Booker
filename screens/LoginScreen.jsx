@@ -65,104 +65,112 @@ const LoginScreen = () => {
   };
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: "white",
-        alignItems: "center",
-        padding: 10,
-      }}
-    >
+    <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView>
-        <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: 100,
-          }}
-        >
-          <Text style={{ color: "#003580", fontSize: 30, fontWeight: "700" }}>
-            Sign In
-          </Text>
-          <Text style={{ marginTop: 15, fontSize: 18, fontWeight: "800" }}>
-            Login to Your Account
-          </Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Sign In</Text>
+          <Text style={styles.subtitle}>Login to Your Account</Text>
         </View>
-        <View style={{ marginTop: 50 }}>
+        <View style={styles.inputContainer}>
           <View>
-            <Text style={{ fontSize: 17, fontWeight: "600", color: "gray" }}>
-              Email
-            </Text>
+            <Text style={styles.label}>Email</Text>
             <TextInput
               value={email}
               onChangeText={(text) => setEmail(text)}
               placeholder="Enter your email"
-              placeholderTextColor={"black"}
-              style={{
-                fontSize: email ? 18 : 18,
-                borderBottomColor: "gray",
-                borderBottomWidth: 1,
-                marginVertical: 10,
-                width: 300,
-              }}
+              placeholderTextColor="black"
+              style={styles.input}
             />
           </View>
-          <View style={{ marginTop: 15 }}>
-            <Text style={{ fontSize: 17, fontWeight: "600", color: "gray" }}>
-              Password
-            </Text>
+          <View style={styles.passwordContainer}>
+            <Text style={styles.label}>Password</Text>
             <TextInput
               value={password}
               onChangeText={(text) => setPassword(text)}
               secureTextEntry={true}
               placeholder="Enter your password"
-              placeholderTextColor={"black"}
-              style={{
-                fontSize: password ? 18 : 18,
-                borderBottomColor: "gray",
-                borderBottomWidth: 1,
-                marginVertical: 10,
-                width: 300,
-              }}
+              placeholderTextColor="black"
+              style={styles.input}
             />
           </View>
         </View>
         <Pressable
           onPress={handleLogin}
-          style={{
-            width: 200,
-            backgroundColor: "#003580",
-            padding: 15,
-            borderRadius: 7,
-            marginTop: 50,
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
+          style={styles.loginButton}
         >
-          <Text
-            style={{
-              textAlign: "center",
-              color: "white",
-              fontSize: 17,
-              fontWeight: "bold",
-            }}
-          >
-            Login
-          </Text>
+          <Text style={styles.loginButtonText}>Login</Text>
         </Pressable>
         <Pressable
           onPress={() => navigation.navigate("Register")}
-          style={{ marginTop: 20 }}
+          style={styles.signupText}
         >
-          <Text style={{ textAlign: "center", color: "gray", fontSize: 17 }}>
-            Don't have an account? Sign up
-          </Text>
+          <Text style={styles.signupText}>Don't have an account? Sign up</Text>
         </Pressable>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
 
-export default LoginScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+    alignItems: "center",
+    padding: 10,
+  },
+  titleContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 100,
+  },
+  title: {
+    color: "#003580",
+    fontSize: 30,
+    fontWeight: "700",
+  },
+  subtitle: {
+    marginTop: 15,
+    fontSize: 18,
+    fontWeight: "800",
+  },
+  inputContainer: {
+    marginTop: 50,
+  },
+  label: {
+    fontSize: 17,
+    fontWeight: "600",
+    color: "gray",
+  },
+  input: {
+    fontSize: 18,
+    borderBottomColor: "gray",
+    borderBottomWidth: 1,
+    marginVertical: 10,
+    width: 300,
+  },
+  passwordContainer: {
+    marginTop: 15,
+  },
+  loginButton: {
+    width: 200,
+    backgroundColor: "#003580",
+    padding: 15,
+    borderRadius: 7,
+    marginTop: 50,
+    alignSelf: "center",
+  },
+  loginButtonText: {
+    textAlign: "center",
+    color: "white",
+    fontSize: 17,
+    fontWeight: "bold",
+  },
+  signupText: {
+    marginTop: 20,
+    textAlign: "center",
+    color: "gray",
+    fontSize: 17,
+  },
+});
 
-const styles = StyleSheet.create({});
+export default LoginScreen;

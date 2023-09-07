@@ -32,75 +32,28 @@ const RoomsScreen = () => {
       <ScrollView>
         {route.params.rooms.map((item, index) => (
           <Pressable
-            style={{ margin: 10, backgroundColor: "white", padding: 10 }}
+            style={styles.roomContainer}
             key={index}
           >
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <Text
-                style={{ color: "#007FFF", fontSize: 17, fontWeight: "500" }}
-              >
-                {item.name}
-              </Text>
+            <View style={styles.roomInfo}>
+              <Text style={styles.roomName}>{item.name}</Text>
               <AntDesign name="infocirlceo" size={24} color="#007FFF" />
             </View>
-            <Text style={{ marginTop: 3, fontSize: 16 }}>
-              pay at the property
-            </Text>
-            <Text style={{ marginTop: 3, color: "green", fontSize: 16 }}>
-              Free cancellation Available
-            </Text>
-            <View
-              style={{
-                marginTop: 4,
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 10,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 18,
-                  color: "red",
-                  textDecorationLine: "line-through",
-                }}
-              >
+            <Text style={styles.paymentInfo}>pay at the property</Text>
+            <Text style={styles.cancellationInfo}>Free cancellation Available</Text>
+            <View style={styles.priceInfo}>
+              <Text style={styles.oldPrice}>
                 {route.params.oldPrice}
               </Text>
-              <Text style={{ fontSize: 18 }}>${route.params.newPrice}</Text>
+              <Text style={styles.newPrice}>${route.params.newPrice}</Text>
             </View>
             <Amenities />
 
             {selected.includes(item.name) ? (
               <Pressable
-                style={{
-                  borderColor: "#318CE7",
-                  backgroundColor: "#F0F8FF",
-                  borderWidth: 2,
-                  width: "100%",
-                  padding: 10,
-                  borderRadius: 5,
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
+                style={styles.selectedButton}
               >
-                <Text
-                  style={{
-                    textAlign: "center",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    color: "#318CE7",
-                    fontWeight: "bold",
-                    fontSize: 16,
-                  }}
-                >
-                  SELECTED
-                </Text>
+                <Text style={styles.selectedButtonText}>SELECTED</Text>
                 <Entypo
                   onPress={() => setSelected([])}
                   name="circle-with-cross"
@@ -111,23 +64,9 @@ const RoomsScreen = () => {
             ) : (
               <Pressable
                 onPress={() => setSelected(item.name)}
-                style={{
-                  borderColor: "#007FFF",
-                  borderWidth: 2,
-                  borderRadius: 5,
-                  padding: 10,
-                }}
+                style={styles.selectButton}
               >
-                <Text
-                  style={{
-                    textAlign: "center",
-                    fontWeight: "700",
-                    fontSize: 16,
-                    color: "#007FFF",
-                  }}
-                >
-                  SELECT
-                </Text>
+                <Text style={styles.selectButtonText}>SELECT</Text>
               </Pressable>
             )}
           </Pressable>
@@ -148,25 +87,108 @@ const RoomsScreen = () => {
               endDate: route.params.endDate,
             })
           }
-          style={{
-            backgroundColor: "#007FFF",
-            padding: 8,
-            marginBottom: 30,
-            borderRadius: 3,
-            marginHorizontal: 15,
-          }}
+          style={styles.reserveButton}
         >
-          <Text
-            style={{ textAlign: "center", color: "white", fontWeight: "bold" }}
-          >
-            Reserve
-          </Text>
+          <Text style={styles.reserveButtonText}>Reserve</Text>
         </Pressable>
       ) : null}
     </>
   );
 };
 
-export default RoomsScreen;
+const styles = StyleSheet.create({
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+    textAlign: "center",
+  },
+  headerStyle: {
+    backgroundColor: "#003580",
+    height: 110,
+    borderBottomColor: "transparent",
+    shadowColor: "transparent",
+  },
+  roomContainer: {
+    margin: 10,
+    backgroundColor: "white",
+    padding: 10,
+  },
+  roomInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  roomName: {
+    color: "#007FFF",
+    fontSize: 17,
+    fontWeight: "500",
+  },
+  paymentInfo: {
+    marginTop: 3,
+    fontSize: 16,
+  },
+  cancellationInfo: {
+    marginTop: 3,
+    color: "green",
+    fontSize: 16,
+  },
+  priceInfo: {
+    marginTop: 4,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  oldPrice: {
+    color: "red",
+    fontSize: 18,
+    textDecorationLine: "line-through",
+  },
+  newPrice: {
+    fontSize: 18,
+  },
+  selectedButton: {
+    borderColor: "#318CE7",
+    backgroundColor: "#F0F8FF",
+    borderWidth: 2,
+    width: "100%",
+    padding: 10,
+    borderRadius: 5,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  selectedButtonText: {
+    textAlign: "center",
+    marginLeft: "auto",
+    marginRight: "auto",
+    color: "#318CE7",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  selectButton: {
+    borderColor: "#007FFF",
+    borderWidth: 2,
+    borderRadius: 5,
+    padding: 10,
+  },
+  selectButtonText: {
+    textAlign: "center",
+    fontWeight: "700",
+    fontSize: 16,
+    color: "#007FFF",
+  },
+  reserveButton: {
+    backgroundColor: "#007FFF",
+    padding: 8,
+    marginBottom: 30,
+    borderRadius: 3,
+    marginHorizontal: 15,
+  },
+  reserveButtonText: {
+    textAlign: "center",
+    color: "white",
+    fontWeight: "bold",
+  },
+});
 
-const styles = StyleSheet.create({});
+export default RoomsScreen;

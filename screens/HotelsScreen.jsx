@@ -568,42 +568,23 @@ const HotelsScreen = () => {
   // console.log(items);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Pressable
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          paddingHorizontal: 20,
-          padding: 12,
-          backgroundColor: "white",
-        }}
+        style={styles.filterContainer}
+        onPress={() => setModalVisible(!modalVisible)}
       >
-        <Pressable
-          onPress={() => setModalVisible(!modalVisible)}
-          style={{ flexDirection: "row", alignItems: "center", marginLeft: 10 }}
-        >
+        <Pressable style={styles.filterButton}>
           <Octicons name="arrow-switch" size={22} color="gray" />
-          <Text style={{ fontSize: 15, fontWeight: "500", marginLeft: 8 }}>
-            sort
-          </Text>
+          <Text style={styles.filterButtonText}>sort</Text>
         </Pressable>
-        {/* <Pressable style={{ flexDirection: "row", alignItems: "center" }}>
-          <Ionicons name="filter" size={22} color="gray" />
-          <Text style={{ fontSize: 15, fontWeight: "500", marginLeft: 8 }}>
-            filter
-          </Text>
-        </Pressable> */}
         <Pressable
           onPress={() =>
             navigation.navigate("Map", { searchResults: searchPlaces })
           }
-          style={{ flexDirection: "row", alignItems: "center", marginRight: 10 }}
+          style={styles.filterButton}
         >
           <FontAwesome name="map-marker" size={22} color="gray" />
-          <Text style={{ fontSize: 15, fontWeight: "500", marginLeft: 8 }}>
-            map
-          </Text>
+          <Text style={styles.filterButtonText}>map</Text>
         </Pressable>
       </Pressable>
       {loading ? (
@@ -611,98 +592,154 @@ const HotelsScreen = () => {
           <ActivityIndicator size="large" color="blue" />
         </Text>
       ) : (
-        <ScrollView style={{ backgroundColor: "#F5F5F5" }}>
-        {sortedData
-          ?.filter((item) => item.place === route.params.place)
-          .map((item) =>
-            item.properties.map((property, index) => (
-              <PropertyCard
-                key={index}
-                rooms={route.params.rooms}
-                children={route.params.children}
-                adults={route.params.adults}
-                selectedDates={route.params.selectedDates}
-                property={property}
-                availableRooms={route.params.rooms}
-              />
-            ))
-          )}
-      </ScrollView>
-      ) }
-      
+        <ScrollView style={styles.scrollView}>
+          {sortedData
+            ?.filter((item) => item.place === route.params.place)
+            .map((item) =>
+              item.properties.map((property, index) => (
+                <PropertyCard
+                  key={index}
+                  rooms={route.params.rooms}
+                  children={route.params.children}
+                  adults={route.params.adults}
+                  selectedDates={route.params.selectedDates}
+                  property={property}
+                  availableRooms={route.params.rooms}
+                />
+              ))
+            )}
+        </ScrollView>
+      )}
       <BottomModal
         onBackdropPress={() => setModalVisible(!modalVisible)}
         swipeDirection={["up", "down"]}
         swipeThreshold={200}
-        footer={
-          <ModalFooter>
-            <Pressable
-              onPress={() => applyFilter(selectedFilter)}
-              style={{
-                paddingRight: 10,
-                marginLeft: "auto",
-                marginRight: "auto",
-                marginVertical: 10,
-                marginBottom: 20,
-              }}
-            >
-              <Text>Apply</Text>
-            </Pressable>
-          </ModalFooter>
-        }
-        modalTitle={
-          <ModalTitle
-            title="Sort and Filter"
-            modalAnimation={new SlideAnimation({ slideFrom: "bottom" })}
-          />
-        }
+        footer={styles.modalFooter}
+        modalTitle={styles.modalTitle}
         onHardwareBackPress={() => setModalVisible(!modalVisible)}
         visible={modalVisible}
         onTouchOutside={() => modalVisible(!modalVisible)}
       >
-        <ModalContent style={{ width: "100%", height: 280 }}>
-          <View style={{ flexDirection: "row" }}>
-            <View
-              style={{
-                marginVertical: 10,
-                flex: 2,
-                height: 280,
-                borderRightWidth: 2,
-              }}
-            >
-              <Text style={{ textAlign: "center" }}>Sort</Text>
-            </View>
-            <View style={{ flex: 3, margin: 10 }}>
-              {filters.map((item, index) => (
-                <Pressable
-                  onPress={() => setSelectedFilter(item.filter)}
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginVertical: 10,
-                  }}
-                  key={index}
-                >
-                  {selectedFilter.includes(item.filter) ? (
-                    <FontAwesome name="circle" size={18} color="green" />
-                  ) : (
-                    <Entypo name="circle" size={18} color="black" />
-                  )}
-                  <Text
-                    style={{ fontSize: 16, fontWeight: "500", marginLeft: 6 }}
-                  >
-                    {item.filter}
-                  </Text>
-                </Pressable>
-              ))}
-            </View>
+        <ModalContent style={styles.modalContent}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Sort</Text>
+          </View>
+          <View style={styles.modalFilter}>
+            {filters.map((item, index) => (
+              <Pressable
+                onPress={() => setSelectedFilter(item.filter)}
+                style={styles.filterItem}
+                key={index}
+              >
+                {selectedFilter.includes(item.filter) ? (
+                  <FontAwesome name="check" size={18} color="#006AFF" />
+                ) : (
+                  <FontAwesome name="circle-o" size={18} color="#555" />
+                )}
+                <Text style={styles.filterText}>{item.filter}</Text>
+              </Pressable>
+            ))}
           </View>
         </ModalContent>
+        <ModalFooter style={styles.modalFooter}>
+          <Pressable
+            style={styles.applyButton}
+            onPress={() => applyFilter(selectedFilter)}
+          >
+            <Text style={styles.applyButtonText}>Apply</Text>
+          </Pressable>
+        </ModalFooter>
       </BottomModal>
     </View>
   );
 };
 
-export default HotelsScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  filterContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    marginTop: 10,
+  },
+  filterButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "white",
+    padding: 10,
+    borderRadius: 20,
+    paddingHorizontal: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  filterButtonText: {
+    marginLeft: 5,
+    color: "gray",
+    fontSize: 16,
+  },
+  headerTitle: {
+    color: "#006AFF",
+    fontSize: 22,
+  },
+  headerStyle: {
+    shadowColor: "transparent",
+    elevation: 0,
+  },
+  scrollView: {
+    margin: 5,
+  },
+  modalFooter: {
+    borderTopWidth: 1,
+    borderTopColor: "#ccc",
+  },
+  modalTitle: {
+    paddingTop: 10,
+    alignSelf: "center",
+  },
+  modalContent: {
+    paddingBottom: 10,
+  },
+  modalView: {
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 15,
+  },
+  modalText: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  modalFilter: {
+    flexDirection: "column",
+    paddingVertical: 5,
+  },
+  filterItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+  },
+  filterText: {
+    marginLeft: 10,
+  },
+  applyButton: {
+    alignSelf: "center",
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    backgroundColor: "#006AFF",
+    borderRadius: 5,
+  },
+  applyButtonText: {
+    color: "white",
+  },
+});
 
-const styles = StyleSheet.create({});
+export default HotelsScreen;

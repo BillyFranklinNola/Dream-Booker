@@ -8,7 +8,6 @@ import { auth } from "../Firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../Firebase";
 
-
 const ConfirmationScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
@@ -48,7 +47,7 @@ const ConfirmationScreen = () => {
     await setDoc(
       userRef,
       {
-        bookings: updatedBookings
+        bookings: updatedBookings,
       },
       { merge: true }
     );
@@ -56,109 +55,122 @@ const ConfirmationScreen = () => {
   };
 
   return (
-    <View>
-      <Pressable style={{ backgroundColor: "white", margin: 10 }}>
+    <View style={styles.container}>
+      <Pressable style={styles.card}>
         <View>
-          <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-            {route.params.name}
-          </Text>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              gap: 6,
-              marginTop: 7,
-            }}
-          >
+          <Text style={styles.propertyName}>{route.params.name}</Text>
+          <View style={styles.ratingContainer}>
             <MaterialIcons name="stars" size={24} color="green" />
             <Text>{route.params.rating}</Text>
-            <View
-              style={{
-                backgroundColor: "#003580",
-                paddingVertical: 3,
-                borderRadius: 5,
-                width: 100,
-              }}
-            >
-              <Text
-                style={{
-                  textAlign: "center",
-                  color: "white",
-                  fontSize: 15,
-                }}
-              >
-                Genius Level
-              </Text>
+            <View style={styles.geniusLevel}>
+              <Text style={styles.geniusLevelText}>Genius Level</Text>
             </View>
           </View>
         </View>
-        <View
-          style={{
-            margin: 12,
-            flexDirection: "row",
-            alignItems: "center",
-            gap: 60,
-          }}
-        >
-          <View>
-            <Text style={{ fontSize: 16, fontWeight: "600", marginBottom: 3 }}>
-              Check In
-            </Text>
-            <Text
-              style={{ fontSize: 16, fontWeight: "bold", color: "#007FFF" }}
-            >
-              {route.params.startDate}
-            </Text>
+        <View style={styles.dateContainer}>
+          <View style={styles.dateDetails}>
+            <Text style={styles.dateLabel}>Check In</Text>
+            <Text style={styles.dateValue}>{route.params.startDate}</Text>
           </View>
-
-          <View>
-            <Text style={{ fontSize: 16, fontWeight: "600", marginBottom: 3 }}>
-              Check Out
-            </Text>
-            <Text
-              style={{ fontSize: 16, fontWeight: "bold", color: "#007FFF" }}
-            >
-              {route.params.endDate}
-            </Text>
+          <View style={styles.dateDetails}>
+            <Text style={styles.dateLabel}>Check Out</Text>
+            <Text style={styles.dateValue}>{route.params.endDate}</Text>
           </View>
         </View>
-        <View style={{ margin: 12 }}>
-          <Text style={{ fontSize: 16, fontWeight: "600", marginBottom: 3 }}>
-            Rooms and Guests
-          </Text>
-          <Text style={{ fontSize: 16, fontWeight: "bold", color: "#007FFF" }}>
+        <View style={styles.roomsContainer}>
+          <Text style={styles.roomsLabel}>Rooms and Guests</Text>
+          <Text style={styles.roomsValue}>
             {route.params.rooms} rooms {route.params.adults} adults{" "}
             {route.params.children} children
           </Text>
         </View>
       </Pressable>
       <Pressable
-          onPress={confirmBooking}
-          style={{
-            backgroundColor: "#003580",
-            width: 160,
-            padding: 5,
-            marginHorizontal: 12,
-            marginBottom: 20,
-            borderRadius: 4,
-            alignSelf: "center",
-          }}
-        >
-          <Text
-            style={{
-              textAlign: "center",
-              color: "white",
-              fontSize: 15,
-              fontWeight: "bold",
-            }}
-          >
-            Book Now
-          </Text>
-        </Pressable>
+        onPress={confirmBooking}
+        style={styles.bookNowButton}
+      >
+        <Text style={styles.bookNowText}>Book Now</Text>
+      </Pressable>
     </View>
   );
 };
 
 export default ConfirmationScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+  card: {
+    backgroundColor: "white",
+    margin: 10,
+  },
+  propertyName: {
+    fontSize: 25,
+    fontWeight: "bold",
+  },
+  ratingContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    marginTop: 7,
+  },
+  geniusLevel: {
+    backgroundColor: "#003580",
+    paddingVertical: 3,
+    borderRadius: 5,
+    width: 100,
+  },
+  geniusLevelText: {
+    textAlign: "center",
+    color: "white",
+    fontSize: 15,
+  },
+  dateContainer: {
+    margin: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 60,
+  },
+  dateDetails: {
+    flex: 1,
+  },
+  dateLabel: {
+    fontSize: 16,
+    fontWeight: "600",
+    marginBottom: 3,
+  },
+  dateValue: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#007FFF",
+  },
+  roomsContainer: {
+    margin: 12,
+  },
+  roomsLabel: {
+    fontSize: 16,
+    fontWeight: "600",
+    marginBottom: 3,
+  },
+  roomsValue: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#007FFF",
+  },
+  bookNowButton: {
+    backgroundColor: "#003580",
+    width: 160,
+    padding: 5,
+    marginHorizontal: 12,
+    marginBottom: 20,
+    borderRadius: 4,
+    alignSelf: "center",
+  },
+  bookNowText: {
+    textAlign: "center",
+    color: "white",
+    fontSize: 15,
+    fontWeight: "bold",
+  },
+});

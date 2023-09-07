@@ -66,97 +66,149 @@ const ReservationDetailsScreen = () => {
     }
   };
   return (
-    <ScrollView contentContainerStyle={{
-      flexGrow: 1,
-      keyboardShouldPersistTaps: 'handled',
-    }}>
-      <View style={{ flex: 1, padding: 20 }}>
-        <View style={{ flexDirection: "column", gap: 10 }}>
-          <Text>First Name</Text>
+    <ScrollView
+      contentContainerStyle={{
+        flexGrow: 1,
+        keyboardShouldPersistTaps: "handled",
+      }}
+    >
+      <View style={styles.container}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>First Name</Text>
           <TextInput
             value={firstName}
             onChangeText={(text) => setFirstName(text)}
-            style={{ padding: 10, borderColor: "gray", borderWidth: 1 }}
+            style={styles.input}
           />
         </View>
 
-        <View style={{ flexDirection: "column", gap: 10, marginTop: 10 }}>
-          <Text>Last Name</Text>
+        <View style={[styles.inputContainer, { marginTop: 10 }]}>
+          <Text style={styles.label}>Last Name</Text>
           <TextInput
             value={lastName}
             onChangeText={(text) => setLastName(text)}
-            style={{ padding: 10, borderColor: "gray", borderWidth: 1 }}
+            style={styles.input}
           />
         </View>
 
-        <View style={{ flexDirection: "column", gap: 10, marginTop: 10 }}>
-          <Text>Email</Text>
+        <View style={[styles.inputContainer, { marginTop: 10 }]}>
+          <Text style={styles.label}>Email</Text>
           <TextInput
             value={email}
             onChangeText={(text) => setEmail(text)}
-            style={{ padding: 10, borderColor: "gray", borderWidth: 1 }}
+            style={styles.input}
           />
         </View>
 
-        <View style={{ flexDirection: "column", gap: 10, marginTop: 10 }}>
-          <Text>Phone no</Text>
+        <View style={[styles.inputContainer, { marginTop: 10 }]}>
+          <Text style={styles.label}>Phone no</Text>
           <TextInput
             value={phoneNo}
             onChangeText={(text) => setPhoneNo(text)}
-            style={{ padding: 10, borderColor: "gray", borderWidth: 1 }}
+            style={styles.input}
           />
         </View>
       </View>
 
-      <Pressable
-        style={{
-          backgroundColor: "white",
-          marginTop: "auto",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: 10,
-        }}
-      >
-        <View>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginTop: 4,
-              gap: 8,
-            }}
-          >
-            <Text
-              style={{
-                color: "red",
-                fontSize: 20,
-                textDecorationLine: "line-through",
-              }}
-            >
-              {route.params.oldPrice * route.params.adults}
-            </Text>
-            <Text style={{ fontSize: 20 }}>
-              ${route.params.newPrice * route.params.adults}
+      <Pressable style={styles.footer} onPress={finalStep}>
+        <View style={styles.footerContent}>
+          <View style={styles.priceInfo}>
+            <View style={styles.priceRow}>
+              <Text style={styles.oldPrice}>
+                {route.params.oldPrice * route.params.adults}
+              </Text>
+              <Text style={styles.newPrice}>
+                ${route.params.newPrice * route.params.adults}
+              </Text>
+            </View>
+            <Text style={styles.savings}>
+              You Saved {route.params.oldPrice - route.params.newPrice} dollars
             </Text>
           </View>
-          <Text>
-            You Saved {route.params.oldPrice - route.params.newPrice} dollars
-          </Text>
+          <View style={styles.submitButton}>
+            <Text style={styles.buttonText}>Submit</Text>
+          </View>
         </View>
-        <Pressable
-          onPress={finalStep}
-          style={{ backgroundColor: "#007FFF", padding: 10, borderRadius: 5 }}
-        >
-          <Text style={{ textAlign: "center", color: "white", fontSize: 15 }}>
-            Submit
-          </Text>
-        </Pressable>
       </Pressable>
     </ScrollView>
   );
 };
 
-export default ReservationDetailsScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  inputContainer: {
+    flexDirection: "column",
+    gap: 10,
+  },
+  label: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "gray",
+  },
+  input: {
+    padding: 10,
+    borderColor: "gray",
+    borderWidth: 1,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+    textAlign: "center",
+  },
+  headerStyle: {
+    backgroundColor: "#003580",
+    height: 110,
+    borderBottomColor: "transparent",
+    shadowColor: "transparent",
+  },
+  footer: {
+    backgroundColor: "white",
+    marginTop: "auto",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 10,
+  },
+  footerContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    flex: 1,
+  },
+  priceInfo: {
+    flex: 1,
+    alignItems: "flex-start",
+  },
+  priceRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  oldPrice: {
+    color: "red",
+    fontSize: 20,
+    textDecorationLine: "line-through",
+  },
+  newPrice: {
+    fontSize: 20,
+  },
+  savings: {
+    marginTop: 4,
+  },
+  submitButton: {
+    backgroundColor: "#007FFF",
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    textAlign: "center",
+    color: "white",
+    fontSize: 15,
+  },
+});
 
-const styles = StyleSheet.create({});
+export default ReservationDetailsScreen;

@@ -33,25 +33,15 @@ const Amenities = () => {
     },
   ];
   return (
-    <View style={{ padding: 10 }}>
-      <Text style={{ fontSize: 17, fontWeight: "600" }}>
-        Most Popular Facilities
-      </Text>
-      <View
-        style={{ flexDirection: "row", alignItems: "center", flexWrap: "wrap" }}
-      >
+    <View style={styles.container}>
+      <Text style={styles.title}>Most Popular Facilities</Text>
+      <View style={styles.servicesContainer}>
         {services.map((item, index) => (
           <View
-            style={{
-              margin: 10,
-              backgroundColor: "#007FFF",
-              paddingHorizontal: 11,
-              paddingVertical: 5,
-              borderRadius: 25,
-            }}
+            style={styles.serviceItem}
             key={index}
           >
-            <Text style={{ textAlign: "center", color: "white" }}>
+            <Text style={styles.serviceText}>
               {item.name}
             </Text>
           </View>
@@ -63,4 +53,28 @@ const Amenities = () => {
 
 export default Amenities;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+  title: {
+    fontSize: 17,
+    fontWeight: "600",
+  },
+  servicesContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    flexWrap: "wrap",
+  },
+  serviceItem: {
+    margin: 10,
+    backgroundColor: "#007FFF",
+    paddingHorizontal: 11,
+    paddingVertical: 5,
+    borderRadius: 25,
+  },
+  serviceText: {
+    textAlign: "center",
+    color: "white",
+  },
+});

@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 const SearchResults = ({ data, input, setInput }) => {
   const navigation = useNavigation();
   return (
-    <View style={{ padding: 10 }}>
+    <View style={styles.container}>
       <FlatList
         data={data}
         renderItem={({ item }) => {
@@ -28,26 +28,20 @@ const SearchResults = ({ data, input, setInput }) => {
                     input: item.place,
                   });
                 }}
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginVertical: 10,
-                }}
+                style={styles.resultContainer}
               >
                 <View>
                   <Image
-                    style={{ width: 70, height: 70 }}
+                    style={styles.resultImage}
                     source={{ uri: item.placeImage }}
                   />
                 </View>
-                <View style={{ marginLeft: 10 }}>
-                  <Text style={{ fontSize: 15, fontWeight: "500" }}>
-                    {item.place}
-                  </Text>
-                  <Text style={{ marginVertical: 4 }}>
+                <View style={styles.resultTextContainer}>
+                  <Text style={styles.resultTextTitle}>{item.place}</Text>
+                  <Text style={styles.resultTextDescription}>
                     {item.shortDescription}
                   </Text>
-                  <Text style={{ color: "gray", fontSize: 15 }}>
+                  <Text style={styles.resultTextProperties}>
                     {item.properties.length} Properties
                   </Text>
                 </View>
@@ -62,4 +56,31 @@ const SearchResults = ({ data, input, setInput }) => {
 
 export default SearchResults;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+  resultContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 10,
+  },
+  resultImage: {
+    width: 70,
+    height: 70,
+  },
+  resultTextContainer: {
+    marginLeft: 10,
+  },
+  resultTextTitle: {
+    fontSize: 15,
+    fontWeight: "500",
+  },
+  resultTextDescription: {
+    marginVertical: 4,
+  },
+  resultTextProperties: {
+    color: "gray",
+    fontSize: 15,
+  },
+});

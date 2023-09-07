@@ -484,23 +484,12 @@ const SearchScreen = () => {
 
   return (
     <SafeAreaView>
-      <View
-        style={{
-          padding: 10,
-          margin: 10,
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          borderColor: "#FFC72C",
-          borderWidth: 4,
-          borderRadius: 10,
-          marginTop: 50,
-        }}
-      >
+      <View style={styles.inputContainer}>
         <TextInput
           value={input}
           onChangeText={(text) => setInput(text)}
           placeholder="Enter your destination"
+          style={styles.input}
         />
         <Feather name="search" size={22} color="black" />
       </View>
@@ -511,4 +500,19 @@ const SearchScreen = () => {
 
 export default SearchScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  inputContainer: {
+    padding: 10,
+    margin: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderColor: "#FFC72C",
+    borderWidth: 4,
+    borderRadius: 10,
+    marginTop: 50,
+  },
+  input: {
+    flex: 1,
+  },
+});
